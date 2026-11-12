@@ -1,0 +1,18 @@
+# === dependencies ===
+node_modules/
+
+# === build/output artifacts ===
+.output/
+.plugin-manager/
+*.db
+*.sqlite
+*.sqlite3
+
+# === local dev data: apps created with the miniapp preset ===
+dsh-miniapps/
+
+# === editor / OS noise ===
+.DS_Store
+*.log
+.idea/
+.vscode/

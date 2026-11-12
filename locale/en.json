@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "title": "miniapp",
+    "description": "An app-authoring preset plus a right-sidebar list that runs and previews the apps you build."
+  },
+  "tab": {
+    "label": "Apps",
+    "empty": "No apps yet. Create one with the miniapp preset.",
+    "emptyHint": "Each app is a subfolder of the configured apps root.",
+    "open": "Open in browser",
+    "start": "Start",
+    "stop": "Stop",
+    "restart": "Restart",
+    "logs": "Logs",
+    "noLogs": "No output yet.",
+    "refresh": "Refresh",
+    "root": "Apps root",
+    "rootUnset": "Not configured",
+    "browserMissing": "The built-in Browser tab is not enabled in this profile. Enable it in the plugin settings to open apps.",
+    "state": {
+      "stopped": "Stopped",
+      "starting": "Starting",
+      "running": "Running (dev)",
+      "crashed": "Crashed",
+      "unsupported": "Unsupported kind"
+    }
+  }
+}

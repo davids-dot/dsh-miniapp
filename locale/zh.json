@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "title": "miniapp",
+    "description": "内置应用创作预设，并在右栏列出、启停和预览你开发的应用。"
+  },
+  "tab": {
+    "label": "应用",
+    "empty": "还没有应用。用 miniapp 预设创建一个吧。",
+    "emptyHint": "每个应用是配置的开发目录下的一个子文件夹。",
+    "open": "在浏览器中打开",
+    "start": "启动",
+    "stop": "停止",
+    "restart": "重启",
+    "logs": "日志",
+    "noLogs": "暂无输出。",
+    "refresh": "刷新",
+    "root": "开发目录",
+    "rootUnset": "未配置",
+    "browserMissing": "当前 profile 未启用内置浏览器标签页，请在插件设置中启用后再打开应用。",
+    "state": {
+      "stopped": "已停止",
+      "starting": "启动中",
+      "running": "运行中（开发模式）",
+      "crashed": "已崩溃",
+      "unsupported": "不支持的类型"
+    }
+  }
+}
