@@ -21,6 +21,21 @@ cd <appsRoot>/<app-id> && npm install --no-audit --no-fund
 ```
 （也可以 `pnpm install`；本机 npm 与 pnpm 都可用。装完运行期完全离线。）
 
+### 1.1 新建项目时初始化 Git 仓库（不强制，失败不报错）
+
+复制完模板、装完依赖后，尝试在该应用目录初始化一个本地 Git 仓库并提交初始版本：
+
+```
+cd <appsRoot>/<app-id> && git init -q && git add . && git commit -q -m "chore: init <app-id> from miniapp template"
+```
+
+规则：
+- **先检测 git 是否可用**：执行 `command -v git` / `git --version`，若命令不存在或退出非 0，视为「用户电脑没有 git 环境」。
+- **没有 git 环境时**：**不要报错、不要让任务失败**。改为在交付说明里用一句提示用户，例如：
+  > ⚠️ 本机未检测到 git，已跳过为该项目创建 Git 仓库。装好 git 后可在 `<appsRoot>/<app-id>` 运行 `git init && git add . && git commit -m "init"` 补上版本管理。
+- git 可用但 `git init`/`git commit` 因其它原因失败（例如不是错误）：忽略该步骤，不要中断创建流程，仅在交付说明里轻描一句。
+- 模板已自带 `.gitignore`（忽略 `node_modules/`、`data/`、`.output/`、日志等），初始提交会自动排除这些。
+
 ## 2. 固定目录清单（生成端不得增删关键文件）
 
 ```
@@ -55,6 +70,19 @@ node --check server.mjs
 ```
 然后告诉用户：应用已创建在 `<appsRoot>/<app-id>`，到右栏「应用」列表点它即可打开（列表会显示状态点、启动/停止/重启按钮与日志）。**不要**自己 `node server.mjs` 长期占用终端，也不要让用户手动敲启动命令 —— 展示侧负责启停。
 
+### 4.1 每次功能改动先在 Git 上提交
+
+本项目默认建有 Git 仓库（见 1.1）。每完成**一组相对完整的功能改动**后，先在当前应用目录提交一次，再继续或交付：
+
+```
+cd <appsRoot>/<app-id> && git add -A && git commit -q -m "<本次改动的简短中文/英文说明>"
+```
+
+- 提交信息要说明这次改了什么（例如 `feat: 登录页 + 会话持久化`、`fix: 列表分页越界`、`style: 移动端适配`）。
+- **同样遵守「无 git 不报错」原则**：若检测到该目录不是 git 仓库或本机无 git，跳过提交即可，不要中断流程；在交付说明里提示用户。
+- 不要为了每一步小改动都提交；按「一个功能点 / 一个可描述的状态」聚合成一次提交，保持历史可读。
+- 不要 `git push`（除非用户明确要求）—— 本地提交即可，远端由用户自己决定。
+
 ## 5. 修改现有应用
 
-只改 `src/` 与 `miniapp.json`。HMR 由 Vite 自动推送到已打开的浏览器标签页，无需重启。若改了 `package.json` 依赖，重新 `npm install` 后在列表里点「重启」。
+只改 `src/` 与 `miniapp.json`。HMR 由 Vite 自动推送到已打开的浏览器标签页，无需重启。若改了 `package.json` 依赖，重新 `npm install` 后在列表里点「重启」。每次改动完成后按 4.1 提交一次。
